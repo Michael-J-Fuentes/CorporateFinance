@@ -60,6 +60,13 @@ public class NetPresentValue {
     }
 
     /*
+    Calculate growth rate of a perpetuity
+     */
+    public static double calculateGrowthRateOfPerpetuity(double cashFlow0, double cashFlow1) {
+        return (cashFlow1 - cashFlow0 ) / cashFlow0; 
+    }
+
+    /*
     Calculate the present value of annuity
      */
     public static double calculatePresentValueOfAnnuity(double couponAmount, double rate, double time) {
@@ -71,5 +78,26 @@ public class NetPresentValue {
      */
     public static double calculatePresentValueOfGrowingAnnuity(double couponAmount, double rate, double time, double growth) {
         return couponAmount * ((1 / (rate - growth)) - (1/ (rate - growth)) * Math.pow((1 + growth)/(1 + rate),time));
+    }
+
+    /*
+    Calculate discount rate
+     */
+    public static double calculateDiscountRate(double presentValue, double futureValue) {
+        return (futureValue - presentValue) / presentValue;
+    }
+
+    /*
+    Calculate discount rate
+     */
+    public static double calculateDiscountRate(double presentValue, double futureValue, double periods) {
+        return Math.pow((futureValue / presentValue), (1 / periods)) - 1;
+    }
+
+    /*
+    Calculate number of periods
+     */
+    public static double calculateNumberOfPeriods(double presentValue, double futureValue, double rate) {
+        return Math.log(futureValue / presentValue) / Math.log(1 + rate);
     }
 }
