@@ -7,6 +7,12 @@ public class FinancialStatementAnalysis {
     public static double calculateCurrentRatio(double totalCurrentAssets, double totalCurrentLiabilities) {
         return totalCurrentAssets / totalCurrentLiabilities;
     }
+    /*
+    Calculate cash ratio
+     */
+    public static double calculateCashRatio(double cash, double currentLiabilities) {
+        return cash / currentLiabilities;
+    }
 
     /*
     Calculate quick assets (current assets - inventory)
@@ -17,8 +23,12 @@ public class FinancialStatementAnalysis {
     /*
     Calculate Quick Ratio
      */
-    public static double calculateQuickRatio(double quickRatio, double totalCurrentLiabilities) {
-        return quickRatio / totalCurrentLiabilities;
+    public static double calculateQuickRatio(double quickAssets, double totalCurrentLiabilities) {
+        return quickAssets / totalCurrentLiabilities;
+    }
+    public static double calculateQuickRatio(double currentAssets, double accountsReceivable,
+                                             double totalCurrentLiabilities) {
+        return calculateQuickRatio(calculateQuickAssets(currentAssets, accountsReceivable), totalCurrentLiabilities);
     }
 
     /*
@@ -185,6 +195,48 @@ public class FinancialStatementAnalysis {
                                       double averageStockholderEquity) {
         return calculateROE(calculateNetProfitMargin(netIncome, averageStockholderEquity),
                 calculateTotalAssetTurnover(totalOperatingRevenue, averageTotalAssets),
-                calculateEquityMultiplier(averageTotalAssets, averageStockholderEquity)); 
+                calculateEquityMultiplier(averageTotalAssets, averageStockholderEquity));
+    }
+
+    /*
+    Calculate payout ratio cash dividends / net income
+     */
+    public static double calculatePayoutRatio(double cashDividends, double netIncome) {
+        return cashDividends / netIncome;
+    }
+
+    /*
+    Calculate retention ratio
+     */
+    public static double calculateRetentionRatio(double retainedEarnings, double netIncome) {
+        return retainedEarnings / netIncome;
+    }
+
+    /*
+    Calculate retained Earnings
+     */
+    public static double calculateRetainedEarnings(double netIncome, double dividends) {
+        return netIncome - dividends;
+    }
+
+    /*
+    Calculate dividend yield
+     */
+    public static double calculateDividendYield(double dividendPerShare, double marketPricePerShare) {
+        return dividendPerShare / marketPricePerShare;
+    }
+
+    /*
+    Calculate times interest earned
+     */
+    public static double calculateTimesInterestEarnedRatio(double EBIT, double interestExpense) {
+        return EBIT / interestExpense;
+    }
+
+    /*
+    Calculate Cash coverage ratio
+     */
+    public static double calculateCashCoverageRatio(double ebit, double depreciation, double interestExpense) {
+        return (ebit + depreciation) / interestExpense;
     }
 }

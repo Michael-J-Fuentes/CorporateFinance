@@ -12,7 +12,7 @@ public class Shares {
     Calculate outstanding shares
      */
     public static int calculateOutstandingShares(double netIncome, double earningsPerShare) {
-        return  (int) Math.round((netIncome / earningsPerShare));
+        return  (int) Math.round((netIncome / earningsPerShare),2);
     }
 
     /*
@@ -41,5 +41,12 @@ public class Shares {
      */
     public static double calculateDividends(double dividendsPerShare, double totalSharesOutstanding) {
         return dividendsPerShare * totalSharesOutstanding;
+    }
+
+    /*
+    Calculate Market Capitalization
+     */
+    public static double calculateMarketCapitalization(double sharePrice, int outstandingShares) {
+        return sharePrice * outstandingShares;
     }
 }
