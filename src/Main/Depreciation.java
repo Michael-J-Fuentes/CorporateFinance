@@ -17,4 +17,9 @@ public class Depreciation {
         }
         return costPerYearArray;
     }
+
+    /*
+    Calculate depreciation for n year
+     */
+
 }

@@ -45,5 +45,13 @@ public class IncomeStatement {
         return calculateEarningsBeforeTax(revenue, expenses, depreciation, interest) - taxes;
     }
 
+    /*
+    Calculate dividend payout ratio
+     */
+    public static double calculateDividendPayoutRatio(double cashDividend, double netIncome) {
+        return cashDividend / netIncome;
+    }
+
+
 
 }

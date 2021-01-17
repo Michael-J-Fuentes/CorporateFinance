@@ -1,6 +1,7 @@
 package Main;
 
 import java.lang.Math;
+import java.util.Arrays;
 
 public class NetPresentValue {
     /*
@@ -11,9 +12,14 @@ public class NetPresentValue {
     }
 
     /*
+    Calculate
+     */
+
+    /*
     Calculate net present value
      */
     public static double calculateNetPresentValue(double currentCost, double presentValue) {
+        // TODO: 1/17/2021 reformat equation  
         return -currentCost + presentValue;
     }
 
@@ -63,7 +69,7 @@ public class NetPresentValue {
     Calculate growth rate of a perpetuity
      */
     public static double calculateGrowthRateOfPerpetuity(double cashFlow0, double cashFlow1) {
-        return (cashFlow1 - cashFlow0 ) / cashFlow0; 
+        return (cashFlow1 - cashFlow0 ) / cashFlow0;
     }
 
     /*
@@ -100,4 +106,38 @@ public class NetPresentValue {
     public static double calculateNumberOfPeriods(double presentValue, double futureValue, double rate) {
         return Math.log(futureValue / presentValue) / Math.log(1 + rate);
     }
+    private static double calculateNetPresentValueForNYear(double cashFlow, double rate, double year) {
+        return (cashFlow / (Math.pow(1 + rate, year)));
+    }
+
+    /*
+    Calculate net present value of t periods
+     */
+    public static double calculateNetPresentValue(double[] cashFlows, double rate) {
+     double netPresentValue = cashFlows[0];
+        for (int i = 1; i < cashFlows.length; i++) {
+            double value = calculateNetPresentValueForNYear(cashFlows[i], rate, i);
+//            value = Main.Math.round(value, 2);
+            System.out.println(value);
+            netPresentValue += value;
+        }
+        return netPresentValue;
+    }
+    /*
+    Calculate net present value of mixed stream
+     */
+    // TODO: 1/17/2021  needs to be completed 
+//    public static double calculateNetPresentValue(double[] cashFlows, double[] frequency, double rate) {
+//        
+//        int totalCashFlowNumber = 0; 
+//        for (int i = 0; i < frequency.length; i++) {
+//            totalCashFlowNumber += frequency[i]; 
+//        }
+//        double[] completeCashFlows  = new double[totalCashFlowNumber]; 
+//        double netPresentValue = com[0];
+//        for (int i = 1; i < completeCashFlows.length; i++) {
+//            netPresentValue 
+//        }
+//    }
+
 }

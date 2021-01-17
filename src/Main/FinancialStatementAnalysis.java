@@ -26,6 +26,7 @@ public class FinancialStatementAnalysis {
     public static double calculateQuickRatio(double quickAssets, double totalCurrentLiabilities) {
         return quickAssets / totalCurrentLiabilities;
     }
+    // todo possible error in equation, should be current assets - inventory ) / lia. Or (cash + acct rec) / lia
     public static double calculateQuickRatio(double currentAssets, double accountsReceivable,
                                              double totalCurrentLiabilities) {
         return calculateQuickRatio(calculateQuickAssets(currentAssets, accountsReceivable), totalCurrentLiabilities);

@@ -1,8 +1,6 @@
 package test.java;
 
 import Main.BalanceSheet;
-import org.junit.jupiter.api.DynamicTest;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -45,7 +43,7 @@ public class BalanceSheetTest {
             "100, 100, 200"
     })
     void calculateCurrentAssetTest(double accountsReceivable, double inventory, double expectedCurrentAssets) {
-        assertEquals(expectedCurrentAssets, BalanceSheet.calculateAssetsCurrent(accountsReceivable, inventory));
+        assertEquals(expectedCurrentAssets, BalanceSheet.calculateCurrentAssets(accountsReceivable, inventory));
     }
 
     @ParameterizedTest
@@ -61,7 +59,7 @@ public class BalanceSheetTest {
             "100, 100, 200"
     })
     void calculateLiabilitiesCurrentTest(double accountsPayable,  double notesPayable, double expected) {
-        assertEquals(expected, BalanceSheet.calculateLiabilitiesCurrent(accountsPayable, notesPayable));
+        assertEquals(expected, BalanceSheet.calculateCurrentLiabilities(accountsPayable, notesPayable));
     }
 
     @ParameterizedTest
@@ -80,6 +78,27 @@ public class BalanceSheetTest {
     })
     void isBalancedTest(double assets, double liabilities, double equity, boolean expected) {
         assertEquals(expected, BalanceSheet.isBalanced(assets, liabilities, equity));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "150, 100, 2, 80, .10, 22, .5, .3"
+    })
+    void calculateExternalFundsNeededTest(double assets, double sales, double changeInSales, double debt,
+                                          double netProfitMargin, double projectedSales, double dividendPayoutRatio,
+                                          double expected) {
+        assertEquals(expected, BalanceSheet.calculateExternalFundsNeeded(
+                assets, sales, debt, netProfitMargin, dividendPayoutRatio, changeInSales, projectedSales), .01);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "100, 50, 25, 125"
+    })
+    void  calculateProjectedRetainedEarningsTest(double presentRetainedEarnings, double projectedNetIncome,
+                                                 double cashDividends, double expected) {
+        assertEquals(expected, BalanceSheet.calculateProjectedRetainedEarnings(
+                presentRetainedEarnings, projectedNetIncome, cashDividends), .01);
     }
 
 }
